@@ -1,0 +1,1 @@
+{"version":3,"file":"main.js","mappings":";;;;;AAAA;AACA,U","sources":["webpack://todo/./src/index.js"],"sourcesContent":["console.log(\"its running\");\nconst a=3;"],"names":[],"sourceRoot":""}
