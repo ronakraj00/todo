@@ -1,7 +1,67 @@
+:root{
+    --padding:1rem;
+}
+
 *{
     border: 1px solid blue;
 }
+
+body{
+    margin: 0px;
+    position: relative;
+    background-color: antiquewhite;
+}
+
 header{
+    padding: var(--padding);
     display: flex;
     justify-content: space-around;
+}
+
+main{
+    display: flex;
+}
+
+#sidebar{
+    width: 20%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: var(--padding);
+    gap: 60px;
+}
+
+#project-show{
+    width: 80%;
+}
+
+#project-form-input{
+    width: 87%;
+}
+
+
+.list-form{
+    position:absolute;
+    margin: 0;
+    top: 0px;
+    bottom: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    backdrop-filter: blur(10px);
+}
+
+.list-form form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+
+}
+
+.invisible{
+    display: none;
 }

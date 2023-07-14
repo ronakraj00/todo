@@ -1,1 +1,3 @@
-console.log("its running");
+import { dom } from "./domStuff";
+
+// dom.renderProject();
