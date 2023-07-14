@@ -65,3 +65,15 @@ main{
 .invisible{
     display: none;
 }
+
+.style-todo{
+    text-align: center;
+    width: 200px;
+    border: 2px solid blueviolet;
+    background-color: chartreuse;
+    resize: both;
+}
+
+.style-todo >*{
+    border: none;
+}

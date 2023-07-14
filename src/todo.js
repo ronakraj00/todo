@@ -13,7 +13,10 @@ const todo=(()=>{
 
     function createToDo(project,title,description,dueDate,priority){
         const newToDo=new Todo(title,description,dueDate,priority);
-        projects.addList(project,newToDo);
+        const foundProject=projects.projectList.find(list=>project.id==list.id);
+        console.log("in todo found project",foundProject);
+        foundProject.list.push(newToDo);
+        console.log(foundProject.list);
     }
 
 

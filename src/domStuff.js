@@ -7,13 +7,13 @@ const dom=(()=>{
     const projectDomList=document.querySelector("[data-project-list]");
     const ProjectFormInput=document.querySelector("[data-project-input]");
     const projectSubmitButton=document.querySelector("[data-project-submit]");
-    
     const projectShow=document.querySelector("#project-show")
 
-    projectSubmitButton.addEventListener("click",()=>{
+    projectSubmitButton.addEventListener("click",(e)=>{
         if(ProjectFormInput.value==""){
             return;
         }
+        e.stopPropagation();
         projects.createProject(ProjectFormInput.value);
         renderProject();
         ProjectFormInput.value="";
@@ -36,11 +36,12 @@ const dom=(()=>{
     function projectListenClick(){
         const projectAllLists=document.querySelectorAll("[data-project-list] li")
         projectAllLists.forEach(list=>{
-            list.addEventListener("click",()=>{
+            list.addEventListener("click",(e)=>{
+                e.stopPropagation();
                 const Project=projects.projectList.find(item=>item.id==list.id);
                 console.log("found",Project);
-                renderListAddButton(Project);
                 renderProjectList(Project);
+                
             })
         })
     }
@@ -50,8 +51,8 @@ const dom=(()=>{
         const projectNameShow=document.createElement("h2");
         projectNameShow.textContent=Project.name;
         projectShow.append(projectNameShow);
-        console.log(Project);
-
+        console.log("received",Project);
+        renderListAddButton(Project);
         Project.list.forEach(todo=>{
             makeListDiv(todo.title,todo.description,todo.dueDate,todo.priority);
         })
@@ -73,6 +74,7 @@ const dom=(()=>{
         listDivDueDate.textContent=dueDate;
         listDivPriority.textContent=priority;
         listDivEdit.textContent="Edit";
+        listDiv.classList.add("style-todo");
 
         listDiv.append(listDivTitle,listDivDescription,listDivDueDate,listDivPriority,listDivEdit)
         projectShow.append(listDiv);
@@ -81,34 +83,35 @@ const dom=(()=>{
 
     function renderListAddButton(Project){
         const listAddButtonDiv=document.createElement("div");
-        listAddButtonDiv.setAttribute("id","list-add-button-div");
+        // listAddButtonDiv.setAttribute("id","list-add-button-div");
         const listAddButton=document.createElement("button");
         listAddButton.textContent="+";
-        listAddButtonDiv.append(listAddButton);
-        listAddButton.addEventListener("click",()=>{
+        listAddButton.addEventListener("click",(e)=>{
+            e.stopPropagation();
             renderListForm(Project);
         })
+        listAddButtonDiv.append(listAddButton);
         projectShow.append(listAddButtonDiv);
     }
-//
+
     function renderListForm(Project){
         const listForm=document.querySelector("[data-list-form]")
         listForm.classList.remove("invisible");
         const listFormSubmit=document.querySelector("[data-list-form] form button")
-        listFormSubmit.addEventListener("click",()=>{
+        listFormSubmit.addEventListener("click",(e)=>{
             listForm.classList.add("invisible");
-            
             const listTitle=document.querySelector("[data-list-title]");
             const listDescription=document.querySelector("[data-list-description]");
             const listDueDate=document.querySelector("[data-list-due-date]");
             const listPriority=document.querySelector("[data-list-priority]");
+            
             todo.createToDo(Project,listTitle.value,listDescription.value,listDueDate.value,listPriority.value);
-            console.log("received",Project);
+            console.log("after create todo received",Project);
             console.log(Project.list);
             renderProjectList(Project);
-        })
+            e.stopPropagation();
+        }, { once: true });
     }
-
 
     return {
         renderProject

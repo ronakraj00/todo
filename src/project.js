@@ -7,8 +7,6 @@ const projects=(()=>{
         }
         id=Date.now();
         list=[];
-
-        
     }
 
     function addList(Project,item){
