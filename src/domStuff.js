@@ -37,6 +37,7 @@ const dom=(()=>{
         const projectAllLists=document.querySelectorAll("[data-project-list] li")
         projectAllLists.forEach(list=>{
             list.addEventListener("click",(e)=>{
+                list.classList.toggle("active-project");
                 e.stopPropagation();
                 const Project=projects.projectList.find(item=>item.id==list.id);
                 console.log("found",Project);
@@ -90,6 +91,7 @@ const dom=(()=>{
             e.stopPropagation();
             renderListForm(Project);
         })
+        listAddButtonDiv.id="list-button-div"
         listAddButtonDiv.append(listAddButton);
         projectShow.append(listAddButtonDiv);
     }
