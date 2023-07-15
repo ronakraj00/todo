@@ -53,7 +53,10 @@ const dom=(()=>{
         const projectAllLists=document.querySelectorAll("[data-project-list] li")
         projectAllLists.forEach(list=>{
             list.addEventListener("click",(e)=>{
-                list.classList.toggle("active-project");
+                projectAllLists.forEach(elem=>{
+                    elem.classList.remove("active-project");
+                })
+                list.classList.add("active-project");
                 e.stopPropagation();
                 const Project=_project__WEBPACK_IMPORTED_MODULE_0__.projects.projectList.find(item=>item.id==list.id);
                 console.log("found",Project);
@@ -76,6 +79,21 @@ const dom=(()=>{
         
     }
 
+    // function isListCheck(){
+    //     const listCheck=document.querySelector(".style-todo input");
+    //     const listDivTitle=document.querySelector(".style-todo h3");
+    //     if(listCheck.checked){
+    //         listDivTitle.classList.add("strike-through");
+    //         removeToDo();
+    //     }
+    //     else{
+    //         listDivTitle.classList.remove("strike-through")
+    //     }
+    // }
+
+    // setInterval(() => {
+    //     isListCheck();
+    // }, 100);
     
 
     function makeListDiv(title,description,dueDate,priority){
@@ -85,6 +103,10 @@ const dom=(()=>{
         const listDivDueDate=document.createElement("p");
         const listDivPriority=document.createElement("h4");
         const listDivEdit=document.createElement("button");
+        const listCheck=document.createElement("input");
+        listCheck.setAttribute("type","checkbox");
+
+
 
         listDivTitle.textContent=title;
         listDivDescription.textContent=description;
@@ -93,7 +115,7 @@ const dom=(()=>{
         listDivEdit.textContent="Edit";
         listDiv.classList.add("style-todo");
 
-        listDiv.append(listDivTitle,listDivDescription,listDivDueDate,listDivPriority,listDivEdit)
+        listDiv.append(listCheck,listDivTitle,listDivDescription,listDivDueDate,listDivPriority,listDivEdit)
         projectShow.append(listDiv);
         
     }
@@ -116,13 +138,31 @@ const dom=(()=>{
         const listForm=document.querySelector("[data-list-form]")
         listForm.classList.remove("invisible");
         const listFormSubmit=document.querySelector("[data-list-form] form button")
+        const priorityType=document.querySelector("[data-priority-type");
+        const listTitle=document.querySelector("[data-list-title]");
+        const listDescription=document.querySelector("[data-list-description]");
+        const listDueDate=document.querySelector("[data-list-due-date]");
+        const listPriority=document.querySelector("[data-list-priority]");
+       
+        setInterval(()=>{
+            if(listPriority.value==1){
+                priorityType.textContent="(Low)";
+            }
+            if(listPriority.value==2){
+                priorityType.textContent="(Mid)";
+            }
+            if(listPriority.value==3){
+                priorityType.textContent="(High)";
+            }
+            
+        },1)
         listFormSubmit.addEventListener("click",(e)=>{
             listForm.classList.add("invisible");
-            const listTitle=document.querySelector("[data-list-title]");
-            const listDescription=document.querySelector("[data-list-description]");
-            const listDueDate=document.querySelector("[data-list-due-date]");
-            const listPriority=document.querySelector("[data-list-priority]");
-            
+
+            if(listTitle.value==""){
+                return;
+            }
+
             _todo__WEBPACK_IMPORTED_MODULE_1__.todo.createToDo(Project,listTitle.value,listDescription.value,listDueDate.value,listPriority.value);
             console.log("after create todo received",Project);
             console.log(Project.list);

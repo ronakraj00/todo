@@ -2,6 +2,9 @@
     --padding:1rem;
 }
 
+.strike-through{
+    text-decoration: line-through;
+}
 /* *{
     border: 1px solid blue;
 } */
@@ -15,7 +18,7 @@ body{
 header{
     padding: var(--padding);
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     border-bottom: 3px solid blueviolet;
     font-size: larger;
     font-weight: bold;
@@ -52,6 +55,7 @@ main{
     padding: 4px;
     background-color: orange;
 
+
 }
 
 #sidebar #filters #filter-list ul li{
@@ -63,7 +67,9 @@ main{
 }
 
 #sidebar #projects{
-    border-top:4px solid blueviolet ;
+    border-top:4px solid blueviolet;
+    margin-top: 20px;
+    padding-top: 20px;
 }
 
 #sidebar #projects span{
@@ -82,11 +88,16 @@ main{
 }
 
 #sidebar #projects form input{
-    background-color: rgb(84, 84, 241);
+    background-color: rgba(84, 84, 241, 0.387);
     border: none;
     border-bottom:2px solid white ;
     color: white;
     font-size: large;
+    height: 30px;
+}
+
+#projects form ::placeholder{
+    color: white;
 }
 
 #sidebar #projects form input:focus{
@@ -103,10 +114,10 @@ main{
     border: none;
     padding: 9px;
     background-color: blueviolet;
-    border-radius: 12px;
     color: white;
     font-weight: 700;
     margin-bottom: 10px;
+    font-size: large;
 
 }
 
@@ -202,39 +213,51 @@ main{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border: 4px solid blueviolet;
-    border-radius: 12px;
+    border: none;
+
     width: 300px;
+    background-color: orange;
     
+}
+
+[data-priority-type]{
+    color: red;
 }
 
 .list-form form label{
     width: 100%;
     text-align: left;
     font-weight: 600;
-    margin-left: 50px;
+    margin-left: 60px;
     padding: 0px;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
-.list-form form label:first-of-type{
-    margin-top: 10px;
+.list-form form input:first-of-type{
+    margin-top: 20px;
+}
+
+.list-form form legend{
+    margin-top:20px;
+    font-size: x-large;
+    padding: 8px;
 }
 
 .list-form form input{
     margin: 0;
     height: 25px;
     width: 80%;
-    border: 2px solid blueviolet;
-    border-radius: 4px;
+    border: none;
+    border-bottom: 3px solid blueviolet;
     margin-bottom: 20px;
+    outline: none;
 }
 
 .list-form form button{
     border: none;
     padding: 9px;
     background-color: blueviolet;
-    border-radius: 12px;
+    
     color: white;
     font-weight: 700;
     margin-bottom: 10px;
