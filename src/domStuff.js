@@ -2,7 +2,7 @@ import {projects} from "./project";
 import { todo } from "./todo";
 const dom=(()=>{
 
-
+    
     //project creation and its functioning
     const body=document.querySelector("body");
     const projectDomList=document.querySelector("[data-project-list]");
@@ -13,6 +13,13 @@ const dom=(()=>{
     const themeAll=document.querySelectorAll("#theme div");
     const menu=document.querySelector("#menu");
     const listForm=document.querySelector("[data-list-form]");
+    
+
+    //retrieve any projects saved earlier
+    const receivedProject=JSON.parse(localStorage.getItem("UserProjects"));
+    receivedProject.forEach(project=>projects.projectList.push(project));
+    renderProject();
+
 
     themeAll.forEach(theme=>{
         theme.addEventListener("click",(e)=>{
@@ -66,6 +73,9 @@ const dom=(()=>{
             newList.id=list.id;
             projectDomList.append(newList);
         });
+
+        //local storage
+        localStorage.setItem("UserProjects",JSON.stringify(projects.projectList));
         console.log("projects",projects.projectList)
         //add click listener to all projects;
         projectListenClick();
@@ -91,10 +101,23 @@ const dom=(()=>{
     function renderProjectList(Project){
         projectShow.textContent="";
         const projectNameShow=document.createElement("h2");
+        const delProject=document.createElement("label");
+
+        delProject.classList.add("delete-project");
+        delProject.textContent=" ❌ DEL Project ❌";
         projectNameShow.textContent=Project.name;
-        projectShow.append(projectNameShow);
+        projectShow.append(projectNameShow,delProject);
         console.log("received",Project);
+
+        delProject.addEventListener("click",(e)=>{
+            projects.projectList.splice(projects.projectList.indexOf(Project),1)
+            localStorage.setItem("UserProjects",JSON.stringify(projects.projectList));
+            renderProject();
+            e.stopPropagation();
+        })
+
         renderListAddButton(Project);
+
         Project.list.forEach(todo=>{
             makeListDiv(todo.title,todo.description,todo.dueDate,todo.priority,todo.id);
         })
@@ -107,6 +130,7 @@ const dom=(()=>{
         projects.projectList.forEach(project=>{
             const foundToDo=project.list.find(todo=>todo.id==listCheck.id);
             project.list.splice(project.list.indexOf(foundToDo),1);
+            localStorage.setItem("UserProjects",JSON.stringify(projects.projectList));
             renderProjectList(project);
         })
     }
@@ -197,6 +221,7 @@ const dom=(()=>{
             todo.createToDo(Project,listTitle.value,listDescription.value,listDueDate.value,listPriority.value);
             console.log("after create todo received",Project);
             console.log(Project.list);
+            localStorage.setItem("UserProjects",JSON.stringify(projects.projectList));
             renderProjectList(Project);
             e.stopPropagation();
         }, { once: true });

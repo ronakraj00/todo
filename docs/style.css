@@ -284,6 +284,14 @@ main{
     border-bottom:2px solid rgba(137, 43, 226, 0.236);
 }
 
+
+.delete-project{
+    text-align: center;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+
 .list-form{
     position:absolute;
     margin: 0;

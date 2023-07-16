@@ -18,7 +18,7 @@ __webpack_require__.r(__webpack_exports__);
 
 const dom=(()=>{
 
-
+    
     //project creation and its functioning
     const body=document.querySelector("body");
     const projectDomList=document.querySelector("[data-project-list]");
@@ -29,6 +29,13 @@ const dom=(()=>{
     const themeAll=document.querySelectorAll("#theme div");
     const menu=document.querySelector("#menu");
     const listForm=document.querySelector("[data-list-form]");
+    
+
+    //retrieve any projects saved earlier
+    const receivedProject=JSON.parse(localStorage.getItem("UserProjects"));
+    receivedProject.forEach(project=>_project__WEBPACK_IMPORTED_MODULE_0__.projects.projectList.push(project));
+    renderProject();
+
 
     themeAll.forEach(theme=>{
         theme.addEventListener("click",(e)=>{
@@ -82,6 +89,9 @@ const dom=(()=>{
             newList.id=list.id;
             projectDomList.append(newList);
         });
+
+        //local storage
+        localStorage.setItem("UserProjects",JSON.stringify(_project__WEBPACK_IMPORTED_MODULE_0__.projects.projectList));
         console.log("projects",_project__WEBPACK_IMPORTED_MODULE_0__.projects.projectList)
         //add click listener to all projects;
         projectListenClick();
@@ -107,10 +117,23 @@ const dom=(()=>{
     function renderProjectList(Project){
         projectShow.textContent="";
         const projectNameShow=document.createElement("h2");
+        const delProject=document.createElement("label");
+
+        delProject.classList.add("delete-project");
+        delProject.textContent=" ❌ DEL Project ❌";
         projectNameShow.textContent=Project.name;
-        projectShow.append(projectNameShow);
+        projectShow.append(projectNameShow,delProject);
         console.log("received",Project);
+
+        delProject.addEventListener("click",(e)=>{
+            _project__WEBPACK_IMPORTED_MODULE_0__.projects.projectList.splice(_project__WEBPACK_IMPORTED_MODULE_0__.projects.projectList.indexOf(Project),1)
+            localStorage.setItem("UserProjects",JSON.stringify(_project__WEBPACK_IMPORTED_MODULE_0__.projects.projectList));
+            renderProject();
+            e.stopPropagation();
+        })
+
         renderListAddButton(Project);
+
         Project.list.forEach(todo=>{
             makeListDiv(todo.title,todo.description,todo.dueDate,todo.priority,todo.id);
         })
@@ -123,6 +146,7 @@ const dom=(()=>{
         _project__WEBPACK_IMPORTED_MODULE_0__.projects.projectList.forEach(project=>{
             const foundToDo=project.list.find(todo=>todo.id==listCheck.id);
             project.list.splice(project.list.indexOf(foundToDo),1);
+            localStorage.setItem("UserProjects",JSON.stringify(_project__WEBPACK_IMPORTED_MODULE_0__.projects.projectList));
             renderProjectList(project);
         })
     }
@@ -213,6 +237,7 @@ const dom=(()=>{
             _todo__WEBPACK_IMPORTED_MODULE_1__.todo.createToDo(Project,listTitle.value,listDescription.value,listDueDate.value,listPriority.value);
             console.log("after create todo received",Project);
             console.log(Project.list);
+            localStorage.setItem("UserProjects",JSON.stringify(_project__WEBPACK_IMPORTED_MODULE_0__.projects.projectList));
             renderProjectList(Project);
             e.stopPropagation();
         }, { once: true });
