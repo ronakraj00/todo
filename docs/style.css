@@ -428,7 +428,7 @@ main{
 }
 
 .animate-delete{
-    animation: delete 400ms ease-in-out;
+    animation: delete 600ms ease-in-out;
 }
 
 .animate-sidebar{
@@ -446,10 +446,7 @@ main{
     }
 }
 @keyframes delete {
-    50%{
-        transform: scale(0);
-    }
     100%{
-        transform: scale(1);
+        transform: scale(0);
     }
 }
