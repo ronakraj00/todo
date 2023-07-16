@@ -360,10 +360,10 @@ main{
 .style-todo{
     text-align: center;
     border-radius: 1px;
-    resize: both;
     display: flex;
     justify-content: space-around;
     align-items: center;
+    flex-wrap: wrap;
     width: min(80%,500px);
     place-self: center;
     padding: 4px;
@@ -371,8 +371,9 @@ main{
 
 .style-todo h3,h4,p{
     margin: 0;
-    height: 20px;
-    overflow: hidden;
+    /* height: 20px;
+    overflow:hidden; */
+    word-wrap: break-word;
     margin-right: 10px;
     
 }
