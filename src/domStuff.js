@@ -13,6 +13,7 @@ const dom=(()=>{
     const themeAll=document.querySelectorAll("#theme div");
     const menu=document.querySelector("#menu");
 
+    
     themeAll.forEach(theme=>{
         theme.addEventListener("click",(e)=>{
             if(e.target.id=="theme1"){
