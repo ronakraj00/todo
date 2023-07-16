@@ -9,6 +9,8 @@ const todo=(()=>{
             this.priority=priority;
 
         }
+        strike=false;
+        id=Date.now();
     }
 
     function createToDo(project,title,description,dueDate,priority){

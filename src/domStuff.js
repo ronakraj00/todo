@@ -4,10 +4,35 @@ const dom=(()=>{
 
 
     //project creation and its functioning
+    const body=document.querySelector("body");
     const projectDomList=document.querySelector("[data-project-list]");
     const ProjectFormInput=document.querySelector("[data-project-input]");
     const projectSubmitButton=document.querySelector("[data-project-submit]");
     const projectShow=document.querySelector("#project-show")
+    const sidebar=document.querySelector("#sidebar");
+    const themeAll=document.querySelectorAll("#theme div");
+    const menu=document.querySelector("#menu");
+
+    themeAll.forEach(theme=>{
+        theme.addEventListener("click",(e)=>{
+            if(e.target.id=="theme1"){
+                body.setAttribute("style","background:url(../src/theme1.webp)")
+            }
+            if(e.target.id=="theme2"){
+                body.setAttribute("style","background:url(../src/theme4.jpg)")
+            }
+            if(e.target.id=="theme3"){
+                body.setAttribute("style","background:url(../src/theme3.avif)")
+            }
+        })
+    })
+
+    menu.addEventListener("click",()=>{
+        // sidebar.classList.toggle("animate-sidebar-invisible");
+        sidebar.classList.add("animate-sidebar");
+        sidebar.classList.toggle("menu-invisible");
+    })
+
 
     projectSubmitButton.addEventListener("click",(e)=>{
         if(ProjectFormInput.value==""){
@@ -58,29 +83,22 @@ const dom=(()=>{
         console.log("received",Project);
         renderListAddButton(Project);
         Project.list.forEach(todo=>{
-            makeListDiv(todo.title,todo.description,todo.dueDate,todo.priority);
+            makeListDiv(todo.title,todo.description,todo.dueDate,todo.priority,todo.id);
         })
         
     }
 
-    // function isListCheck(){
-    //     const listCheck=document.querySelector(".style-todo input");
-    //     const listDivTitle=document.querySelector(".style-todo h3");
-    //     if(listCheck.checked){
-    //         listDivTitle.classList.add("strike-through");
-    //         removeToDo();
-    //     }
-    //     else{
-    //         listDivTitle.classList.remove("strike-through")
-    //     }
-    // }
-
-    // setInterval(() => {
-    //     isListCheck();
-    // }, 100);
+    //handle checked action of list
     
+    function removeToDo(listCheck){
+        projects.projectList.forEach(project=>{
+            const foundToDo=project.list.find(todo=>todo.id==listCheck.id);
+            project.list.splice(project.list.indexOf(foundToDo),1);
+            renderProjectList(project);
+        })
+    }
 
-    function makeListDiv(title,description,dueDate,priority){
+    function makeListDiv(title,description,dueDate,priority,id){
         const listDiv=document.createElement("div");
         const listDivTitle=document.createElement("h3");
         const listDivDescription=document.createElement("p");
@@ -88,10 +106,30 @@ const dom=(()=>{
         const listDivPriority=document.createElement("h4");
         const listDivEdit=document.createElement("button");
         const listCheck=document.createElement("input");
+        const deleteIcon=document.createElement("div");
+
+
+        listCheck.addEventListener("click",()=>{
+                listDivTitle.classList.toggle("strike-through");
+        })
+
+
+        deleteIcon.addEventListener("click",()=>{
+            listDiv.classList.add("animate-delete");
+            setTimeout(() => {
+                removeToDo(listCheck);
+            }, 920);
+        })
+
+        listDiv.classList.add(`priority-${priority}`);
+
+
         listCheck.setAttribute("type","checkbox");
+        listCheck.id=id;
 
 
-
+        deleteIcon.setAttribute("class","pointer");
+        deleteIcon.textContent="DEL";
         listDivTitle.textContent=title;
         listDivDescription.textContent=description;
         listDivDueDate.textContent=dueDate;
@@ -99,7 +137,7 @@ const dom=(()=>{
         listDivEdit.textContent="Edit";
         listDiv.classList.add("style-todo");
 
-        listDiv.append(listCheck,listDivTitle,listDivDescription,listDivDueDate,listDivPriority,listDivEdit)
+        listDiv.append(listCheck,listDivTitle,listDivDueDate,listDivEdit,deleteIcon)
         projectShow.append(listDiv);
         
     }

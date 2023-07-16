@@ -1,5 +1,27 @@
 :root{
     --padding:1rem;
+    --todo-width:80%;
+}
+
+@font-face {
+    font-family: main-font;
+    src: url(../src/fonts/Tektur/Tektur-VariableFont_wdth\,wght.ttf);
+}
+
+.pointer{
+    cursor: pointer;
+}
+
+.priority-1{
+    background: linear-gradient(90deg,rgba(152, 233, 234, 0.729),rgb(189, 189, 237));
+}
+
+.priority-2{
+    background: linear-gradient(90deg,rgba(155, 234, 152, 0.729),rgb(235, 237, 189));
+}
+
+.priority-3{
+    background: linear-gradient(90deg,rgba(234, 152, 152, 0.729),rgb(237, 189, 236));
 }
 
 .strike-through{
@@ -9,17 +31,44 @@
     border: 1px solid blue;
 } */
 
+#theme{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 200px;
+    border: 1px solid;
+}
+
+#theme1,#theme2,#theme3{
+    width: 20px;
+    height: 20px;
+}
+
+#theme1{
+    background-color: yellow;
+}
+
+#theme2{
+    background-color: rgb(0, 17, 255);
+}
+
+#theme3{
+    background-color: rgb(0, 255, 166);
+}
+
 body{
     margin: 0px;
     position: relative;
-    /* overflow: hidden; */
+    font-family:main-font ;
+    background:url(../src/theme4.jpg);
+    
 }
 
 header{
     padding: var(--padding);
     display: flex;
     justify-content: space-between;
-    border-bottom: 3px solid blueviolet;
+    border-bottom: 6px solid rgba(137, 43, 226, 0.243);
     font-size: larger;
     font-weight: bold;
 }
@@ -34,7 +83,7 @@ main{
     display: flex;
     flex-direction: column;
     padding: var(--padding);
-    border-right: 3px solid blueviolet;
+    border-right: 6px solid rgba(137, 43, 226, 0.232);
 }
 
 .active-project{
@@ -150,8 +199,6 @@ main{
     display: grid;
     grid-template-columns: repeat(1,1fr);
     grid-template-rows: repeat(1,50px);
-    /* grid-template-areas: 
-    "project-name project-name add-button"; */
     grid-auto-rows: max-content;
     row-gap: 4px;
     column-gap: 1rem;
@@ -160,22 +207,26 @@ main{
 
 
 #project-show #list-button-div{
-    /* grid-area: add-button; */
     text-align: left;
     padding: 1px;
-    border-bottom: 2px solid blueviolet;
+    border-bottom: 2px solid rgba(137, 43, 226, 0.309);
     margin-bottom: 20px;
+}
+
+#project-show #list-button-div::after{
+    content: "Create A New TODO";
+    margin-bottom: 10px;
 }
 
 #project-show #list-button-div button{
     background-color: rgb(168, 43, 226);
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     border: 3px solid ;
-    border-radius: 50%;
+    /* border-radius: 50%; */
     color: white;
     padding: 1px 0px;
-    font-size: xx-large;
+    font-size: x-large;
     font-weight: 700;
     text-align: center;
 
@@ -183,15 +234,13 @@ main{
 }
 #project-show h2{
     margin: 0;
-    /* grid-area: project-name; */
     text-align: center;
     padding: 1px;
     box-sizing: border-box;
     font-size: xx-large;
     font-weight: 300;
-    font-family: 'Times New Roman', Times, serif;
     letter-spacing: 10px;
-    border-bottom:2px solid blueviolet;
+    border-bottom:2px solid rgba(137, 43, 226, 0.236);
 }
 
 .list-form{
@@ -202,7 +251,7 @@ main{
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%;
+    height: max(100vh,100%);
     width: 100%;
     backdrop-filter: blur(10px);
     background-color: rgba(137, 43, 226, 0.428);
@@ -216,7 +265,7 @@ main{
     border: none;
 
     width: 300px;
-    background-color: orange;
+    background: linear-gradient(90deg,rgba(152, 233, 234, 0.729),rgb(189, 189, 237));
     
 }
 
@@ -230,7 +279,6 @@ main{
     font-weight: 600;
     margin-left: 60px;
     padding: 0px;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 .list-form form input:first-of-type{
@@ -271,14 +319,12 @@ main{
 
 .style-todo{
     text-align: center;
-    border: 2px solid blueviolet;
     border-radius: 1px;
-    background-color:lightblue;
-    background: linear-gradient(90deg,rgba(152, 233, 234, 0.729),rgb(189, 189, 237));
     resize: both;
     display: flex;
     justify-content: space-around;
-    width: 80%;
+    align-items: center;
+    width: min(80%,500px);
     place-self: center;
     padding: 4px;
 }
@@ -287,9 +333,72 @@ main{
     margin: 0;
     height: 20px;
     overflow: hidden;
+    margin-right: auto;
+    
 }
 
-/* .style-todo >*{
+.style-todo input{
+    margin-right: auto;
+    cursor: pointer;
+    appearance: none;
+    background-color: rgba(0, 0, 0, 0.097);
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.style-todo input::before{
+    content: "";
+    background-color: blueviolet;
+    width: 70%;
+    height: 70%;
+    transform: scale(0);
+}
+.style-todo input:checked::before{
+    transform: scale(1);
+}
+
+
+.style-todo div{
+    margin:0 10px;
+    padding: 4px;
+}
+
+.style-todo button{
     border: none;
-    margin: 0;
-} */
+    font-family: main-font;
+    font-weight:400;
+    background-color: rgba(255, 255, 255, 0);
+    font-size:medium;
+    cursor: pointer;
+}
+
+.menu-invisible{
+    display: none !important;
+}
+
+.animate-delete{
+    animation: delete 1s ;
+}
+
+.animate-sidebar{
+    animation: sidebar 1s ease-in-out;
+    
+}
+
+
+@keyframes sidebar {
+    50%{
+        width: 100%;
+    }
+    100%{
+        width: 150px;
+    }
+}
+@keyframes delete {
+    100%{
+        width: 80px;
+    }
+}
