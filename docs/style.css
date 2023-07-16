@@ -1,6 +1,7 @@
 :root{
     --padding:1rem;
     --todo-width:80%;
+    --blur-body:10px;
 }
 
 @font-face {
@@ -62,6 +63,9 @@ body{
     font-family:main-font;
     background: url(../src/theme4.jpg);
     background-attachment: fixed;
+    backdrop-filter: blur(var(--blur-body));
+    height: 100vh;
+    width: 100vw;
     
 }
 
@@ -86,6 +90,10 @@ main{
     cursor: pointer;
 }
 
+#sidebar-section{
+    position: relative;
+}
+
 #sidebar{
     width: 150px;
     height: 100vh;
@@ -93,7 +101,29 @@ main{
     flex-direction: column;
     padding: var(--padding);
     border-right: 6px solid rgba(137, 43, 226, 0.232);
+    height: 600px;
+    overflow-y: scroll;
+    position: static;
+    top: 0px;
 }
+ ::-webkit-scrollbar {
+        width: 4px;
+    }
+  
+  /* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f100; 
+  }
+   
+  /* Handle */
+::-webkit-scrollbar-thumb {
+    background: #ff660000; 
+  }
+  
+  /* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  } */
 
 .active-project{
     background-color: rgba(94, 94, 165, 0.355);

@@ -28,9 +28,19 @@ const dom=(()=>{
         })
     })
 
+    let menuClick=0;
+
     menu.addEventListener("click",()=>{
         // sidebar.classList.add("animate-sidebar");
         sidebar.classList.toggle("menu-invisible");
+        const root=document.querySelector(':root');
+        menuClick++;
+        if(menuClick%2!=0){
+            root.style.setProperty("--blur-body","0px");
+        }
+        else{
+            root.style.setProperty("--blur-body","10px");
+        }
     })
 
 
