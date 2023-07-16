@@ -101,7 +101,7 @@ main{
     flex-direction: column;
     padding: var(--padding);
     border-right: 6px solid rgba(137, 43, 226, 0.232);
-    height: 600px;
+    height: 85vh;
     overflow-y: scroll;
     position: static;
     top: 0px;
@@ -123,7 +123,7 @@ main{
   /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
     background: #555; 
-  } */
+  }
 
 .active-project{
     background-color: rgba(94, 94, 165, 0.355);
@@ -294,8 +294,7 @@ main{
     align-items: center;
     height: max(100vh,100%);
     width: 100%;
-    background: url(./theme3.avif);
-    backdrop-filter: blur(10px);
+    background: url(./theme4.jpg);
 }
 
 .list-form form{
