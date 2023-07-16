@@ -6,7 +6,7 @@
 
 @font-face {
     font-family: main-font;
-    src: url(../src/fonts/Tektur/Tektur-VariableFont_wdth\,wght.ttf);
+    src: url(./fonts/Tektur/Tektur-VariableFont_wdth\,wght.ttf);
 }
 
 .pointer{
@@ -61,7 +61,7 @@ body{
     margin: 0px;
     position: relative;
     font-family:main-font;
-    background: url(../src/theme4.jpg);
+    background: url(./theme4.jpg);
     background-attachment: fixed;
     backdrop-filter: blur(var(--blur-body));
     height: 100vh;
