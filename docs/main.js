@@ -28,18 +28,21 @@ const dom=(()=>{
     const sidebar=document.querySelector("#sidebar");
     const themeAll=document.querySelectorAll("#theme div");
     const menu=document.querySelector("#menu");
-
+    const listForm=document.querySelector("[data-list-form]");
 
     themeAll.forEach(theme=>{
         theme.addEventListener("click",(e)=>{
             if(e.target.id=="theme1"){
                 body.setAttribute("style","background:url(./theme1.webp);background-attachment: fixed")
+                listForm.setAttribute("style","background:url(./theme1.webp);background-attachment: fixed")
             }
             if(e.target.id=="theme2"){
                 body.setAttribute("style","background:url(./theme4.jpg);background-attachment: fixed")
+                listForm.setAttribute("style","background:url(./theme4.jpg);background-attachment: fixed")
             }
             if(e.target.id=="theme3"){
-                body.setAttribute("style","background:url(./theme3.avif);background-attachment: fixed")
+                body.setAttribute("style","background:url(./theme3.avif);background-attachment: fixed;backdrop-filter:blur(10px)")
+                listForm.setAttribute("style","background:url(./theme3.avif);background-attachment: fixed;backdrop-filter:blur(10px)")
             }
         })
     })
@@ -127,9 +130,7 @@ const dom=(()=>{
     function makeListDiv(title,description,dueDate,priority,id){
         const listDiv=document.createElement("div");
         const listDivTitle=document.createElement("h3");
-        const listDivDescription=document.createElement("p");
         const listDivDueDate=document.createElement("p");
-        const listDivPriority=document.createElement("h4");
         const listDivEdit=document.createElement("button");
         const listCheck=document.createElement("input");
         const deleteIcon=document.createElement("div");
@@ -157,9 +158,7 @@ const dom=(()=>{
         deleteIcon.setAttribute("class","pointer");
         deleteIcon.textContent="DEL";
         listDivTitle.textContent=title;
-        listDivDescription.textContent=description;
         listDivDueDate.textContent=dueDate;
-        listDivPriority.textContent=priority;
         listDivEdit.textContent="Edit";
         listDiv.classList.add("style-todo");
 

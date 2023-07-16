@@ -247,8 +247,8 @@ main{
 
 
 #project-show #list-button-div{
-    text-align: left;
-    padding: 1px;
+    text-align: center;
+    padding: 4px;
     border-bottom: 2px solid rgba(137, 43, 226, 0.309);
     margin-bottom: 20px;
 }
@@ -256,20 +256,21 @@ main{
 #project-show #list-button-div::after{
     content: "Create A New TODO";
     margin-bottom: 10px;
+    margin-left: 7px;
 }
 
 #project-show #list-button-div button{
-    background-color: rgb(168, 43, 226);
+    background-color: rgba(168, 43, 226, 0);
     width: 30px;
     height: 30px;
-    border: 3px solid ;
-    /* border-radius: 50%; */
-    color: white;
-    padding: 1px 0px;
+    border: 2px solid rgb(0, 0, 0);
+    border-radius: 50%;
+    color: rgb(0, 0, 0);
     font-size: x-large;
     font-weight: 700;
-    text-align: center;
-
+    line-height: 10px;
+    padding: 4px;
+    cursor: pointer;
 
 }
 #project-show h2{
@@ -293,8 +294,8 @@ main{
     align-items: center;
     height: max(100vh,100%);
     width: 100%;
+    background: url(./theme3.avif);
     backdrop-filter: blur(10px);
-    /* background-color: rgba(137, 43, 226, 0.428); */
 }
 
 .list-form form{
@@ -303,7 +304,6 @@ main{
     justify-content: center;
     align-items: center;
     border: none;
-
     width: 300px;
     background: linear-gradient(90deg,rgba(152, 233, 234, 0.729),rgb(189, 189, 237));
     
@@ -373,8 +373,12 @@ main{
     margin: 0;
     height: 20px;
     overflow: hidden;
-    margin-right: auto;
+    margin-right: 10px;
     
+}
+
+.style-todo p{
+    margin-left: auto;
 }
 
 .style-todo input{
