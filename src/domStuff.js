@@ -16,13 +16,13 @@ const dom=(()=>{
     themeAll.forEach(theme=>{
         theme.addEventListener("click",(e)=>{
             if(e.target.id=="theme1"){
-                body.setAttribute("style","background:url(../src/theme1.webp)")
+                body.setAttribute("style","background:url(../src/theme1.webp);background-attachment: fixed")
             }
             if(e.target.id=="theme2"){
-                body.setAttribute("style","background:url(../src/theme4.jpg)")
+                body.setAttribute("style","background:url(../src/theme4.jpg);background-attachment: fixed")
             }
             if(e.target.id=="theme3"){
-                body.setAttribute("style","background:url(../src/theme3.avif)")
+                body.setAttribute("style","background:url(../src/theme3.avif);background-attachment: fixed")
             }
         })
     })

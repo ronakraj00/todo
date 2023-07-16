@@ -59,8 +59,9 @@
 body{
     margin: 0px;
     position: relative;
-    font-family:main-font ;
-    background:url(../src/theme4.jpg);
+    font-family:main-font;
+    background: url(../src/theme4.jpg);
+    background-attachment: fixed;
     
 }
 
@@ -75,6 +76,14 @@ header{
 
 main{
     display: flex;
+}
+
+#menu{
+    cursor: pointer;
+}
+
+#theme div{
+    cursor: pointer;
 }
 
 #sidebar{
@@ -102,7 +111,7 @@ main{
     gap: 10px;
     list-style-type:none;
     padding: 4px;
-    background-color: orange;
+    background-color: rgba(0, 0, 0, 0);
 
 
 }
@@ -129,7 +138,7 @@ main{
 
 #sidebar #projects form{
     border: none;
-    background-color:orange;
+    background-color: rgba(0, 0, 0, 0);
     padding: 4px;
     display: flex;
     flex-direction: column;
@@ -172,6 +181,7 @@ main{
 
 #sidebar #projects #project-list{
     background-color: orange;
+    background-color: rgba(0, 0, 0, 0);
     list-style: none;
     box-sizing: border-box;
     padding: 8px;
@@ -254,7 +264,7 @@ main{
     height: max(100vh,100%);
     width: 100%;
     backdrop-filter: blur(10px);
-    background-color: rgba(137, 43, 226, 0.428);
+    /* background-color: rgba(137, 43, 226, 0.428); */
 }
 
 .list-form form{
@@ -373,6 +383,10 @@ main{
     background-color: rgba(255, 255, 255, 0);
     font-size:medium;
     cursor: pointer;
+}
+
+.style-todo:last-of-type{
+    margin-bottom: 50px;
 }
 
 .menu-invisible{
