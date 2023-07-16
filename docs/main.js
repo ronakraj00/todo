@@ -18,7 +18,6 @@ __webpack_require__.r(__webpack_exports__);
 
 const dom=(()=>{
 
-    
     //project creation and its functioning
     const body=document.querySelector("body");
     const projectDomList=document.querySelector("[data-project-list]");
@@ -29,6 +28,7 @@ const dom=(()=>{
     const themeAll=document.querySelectorAll("#theme div");
     const menu=document.querySelector("#menu");
     const listForm=document.querySelector("[data-list-form]");
+    
     
 
     //retrieve any projects saved earlier
@@ -55,6 +55,8 @@ const dom=(()=>{
     })
 
     let menuClick=0;
+
+    sidebar.classList.add("menu-invisible")
 
     menu.addEventListener("click",()=>{
         // sidebar.classList.add("animate-sidebar");
@@ -129,6 +131,7 @@ const dom=(()=>{
             _project__WEBPACK_IMPORTED_MODULE_0__.projects.projectList.splice(_project__WEBPACK_IMPORTED_MODULE_0__.projects.projectList.indexOf(Project),1)
             localStorage.setItem("UserProjects",JSON.stringify(_project__WEBPACK_IMPORTED_MODULE_0__.projects.projectList));
             renderProject();
+            renderProjectList(_project__WEBPACK_IMPORTED_MODULE_0__.projects.projectList[0]);
             e.stopPropagation();
         })
 
