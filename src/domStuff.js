@@ -129,7 +129,7 @@ const dom=(()=>{
             listDiv.classList.add("animate-delete");
             setTimeout(() => {
                 removeToDo(listCheck);
-            }, 920);
+            }, 400);
         })
 
         listDiv.classList.add(`priority-${priority}`);
