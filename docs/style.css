@@ -61,7 +61,7 @@ body{
     margin: 0px;
     position: relative;
     font-family:main-font;
-    background: url(./theme4.jpg);
+    background: url(./theme2.jpg);
     background-attachment: fixed;
     backdrop-filter: blur(var(--blur-body));
     height: 100vh;
@@ -305,7 +305,7 @@ main{
     align-items: center;
     height: max(100vh,100%);
     width: 100%;
-    background: url(./theme4.jpg);
+    background: url(./theme2.jpg);
 }
 
 .list-form form{
