@@ -251,6 +251,8 @@ main{
     padding: 4px;
     border-bottom: 2px solid rgba(137, 43, 226, 0.309);
     margin-bottom: 20px;
+    width: fit-content;
+    justify-self: center;
 }
 
 #project-show #list-button-div::after{
@@ -290,9 +292,12 @@ main{
     display: flex;
     justify-content: center;
     align-items: center;
-    /* border: 2px solid red; */
+    border: 2px solid red;
     color: red;
     padding: 4px;
+    width: fit-content;
+    justify-self: right;
+    
 }
 
 .list-form{
