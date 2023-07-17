@@ -29,12 +29,15 @@ const dom=(()=>{
     const menu=document.querySelector("#menu");
     const listForm=document.querySelector("[data-list-form]");
     
-    
+       
 
     //retrieve any projects saved earlier
     const receivedProject=JSON.parse(localStorage.getItem("UserProjects"));
-    receivedProject.forEach(project=>_project__WEBPACK_IMPORTED_MODULE_0__.projects.projectList.push(project));
-    renderProject();
+    if(receivedProject){
+        receivedProject.forEach(project=>_project__WEBPACK_IMPORTED_MODULE_0__.projects.projectList.push(project));
+        renderProject();
+    }
+    
 
 
     themeAll.forEach(theme=>{
@@ -117,7 +120,13 @@ const dom=(()=>{
     }
 
     function renderProjectList(Project){
+
         projectShow.textContent="";
+
+        if(!Project){
+            return;
+        }
+        
         const projectNameShow=document.createElement("h2");
         const delProject=document.createElement("label");
 
