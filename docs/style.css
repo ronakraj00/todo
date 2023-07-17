@@ -32,6 +32,15 @@
     border: 1px solid blue;
 } */
 
+#menu{
+    padding: 4px;
+}
+
+.menu-active{
+    background-color: blueviolet;
+    color: white;
+}
+
 #theme{
     display: flex;
     justify-content: space-around;

@@ -34,6 +34,7 @@ const dom=(()=>{
 
     themeAll.forEach(theme=>{
         theme.addEventListener("click",(e)=>{
+            
             if(e.target.id=="theme1"){
                 body.setAttribute("style","background:url(./theme1.webp);background-attachment: fixed")
                 listForm.setAttribute("style","background:url(./theme1.webp);background-attachment: fixed")
@@ -49,6 +50,7 @@ const dom=(()=>{
                 listForm.setAttribute("style","background:url(./theme3.avif);background-attachment: fixed;backdrop-filter:blur(10px)")
                 saveTheme("theme3.avif");
             }
+            e.stopPropagation();
         })
     })
 
@@ -62,6 +64,9 @@ const dom=(()=>{
     sidebar.classList.add("menu-invisible")
 
     menu.addEventListener("click",()=>{
+        
+        menu.classList.toggle("menu-active");
+
         // sidebar.classList.add("animate-sidebar");
         sidebar.classList.toggle("menu-invisible");
         const root=document.querySelector(':root');
@@ -72,6 +77,7 @@ const dom=(()=>{
         else{
             root.style.setProperty("--blur-body","10px");
         }
+        e.stopPropagation();
     })
 
 
@@ -79,11 +85,11 @@ const dom=(()=>{
         if(ProjectFormInput.value==""){
             return;
         }
-        e.stopPropagation();
+        
         projects.createProject(ProjectFormInput.value);
         renderProject();
         ProjectFormInput.value="";
-    
+        e.stopPropagation();
     })
     
     function renderProject(){
@@ -109,11 +115,12 @@ const dom=(()=>{
                     elem.classList.remove("active-project");
                 })
                 list.classList.add("active-project");
-                e.stopPropagation();
+                
                 const Project=projects.projectList.find(item=>item.id==list.id);
                 renderProjectList(Project);
                 sidebar.classList.toggle("menu-invisible");
-                
+                menu.classList.toggle("menu-active")
+                e.stopPropagation();
             })
         })
     }
@@ -132,6 +139,7 @@ const dom=(()=>{
         delProject.classList.add("delete-project");
         delProject.textContent="DEL Project";
         projectNameShow.textContent=Project.name;
+
         projectNameShow.append(delProject);
         projectShow.append(projectNameShow,delProject);
 
@@ -151,7 +159,6 @@ const dom=(()=>{
         
     }
 
-    //handle checked action of list
     
     function removeToDo(listCheck){
         projects.projectList.forEach(project=>{
@@ -172,19 +179,21 @@ const dom=(()=>{
 
         // let clickCount=0;
 
-        listCheck.addEventListener("click",()=>{
-                
+        listCheck.addEventListener("click",(e)=>{
+            
             listDivTitle.classList.toggle("strike-through");
-                if(todo.strike){
-                    todo.strike=false;
-                }
-                else{
-                    todo.strike=true;
-                }
-                // (clickCount++%2!=0)?todo.strike=true:todo.strike=false;
-                console.log(todo);
-                localStorage.setItem("UserProjects",JSON.stringify(projects.projectList));
 
+            if(todo.strike){
+                todo.strike=false;
+            }
+            else{
+                todo.strike=true;
+            }
+            // (clickCount++%2!=0)?todo.strike=true:todo.strike=false;
+            
+            localStorage.setItem("UserProjects",JSON.stringify(projects.projectList));
+            
+            e.stopPropagation();
         })
 
         if(todo.strike){
@@ -192,11 +201,12 @@ const dom=(()=>{
             listCheck.checked=true;
         }
 
-        deleteIcon.addEventListener("click",()=>{
+        deleteIcon.addEventListener("click",(e)=>{
             listDiv.classList.add("animate-delete");
             setTimeout(() => {
                 removeToDo(listCheck);
             }, 400);
+            e.stopPropagation();
         })
 
         listDiv.classList.add(`priority-${priority}`);
@@ -224,8 +234,8 @@ const dom=(()=>{
         const listAddButton=document.createElement("button");
         listAddButton.textContent="+";
         listAddButton.addEventListener("click",(e)=>{
-            e.stopPropagation();
             renderListForm(Project);
+            e.stopPropagation();
         })
         listAddButtonDiv.id="list-button-div"
         listAddButtonDiv.append(listAddButton);
