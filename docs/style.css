@@ -100,7 +100,7 @@ main{
     display: flex;
     flex-direction: column;
     padding: var(--padding);
-    border-right: 6px solid rgba(137, 43, 226, 0.232);
+    /* border-right: 6px solid rgba(137, 43, 226, 0.232); */
     height: 85vh;
     overflow-y: scroll;
     position: static;
@@ -288,8 +288,11 @@ main{
 .delete-project{
     text-align: center;
     display: flex;
-    justify-content: right;
+    justify-content: center;
     align-items: center;
+    /* border: 2px solid red; */
+    color: red;
+    padding: 4px;
 }
 
 .list-form{

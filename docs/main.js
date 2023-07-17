@@ -29,6 +29,13 @@ const dom=(()=>{
     const menu=document.querySelector("#menu");
     const listForm=document.querySelector("[data-list-form]");
     
+    //retrieve last theme
+    const receivedTheme=localStorage.getItem("UserTheme");
+    if(receivedTheme){
+        body.setAttribute("style",`background:url(./${receivedTheme});background-attachment: fixed;backdrop-filter:blur(10px)`)
+        listForm.setAttribute("style",`background:url(./${receivedTheme});background-attachment: fixed;backdrop-filter:blur(10px)`)
+
+    }
        
 
     //retrieve any projects saved earlier
@@ -36,6 +43,7 @@ const dom=(()=>{
     if(receivedProject){
         receivedProject.forEach(project=>_project__WEBPACK_IMPORTED_MODULE_0__.projects.projectList.push(project));
         renderProject();
+        renderProjectList(_project__WEBPACK_IMPORTED_MODULE_0__.projects.projectList[0]);
     }
     
 
@@ -45,17 +53,29 @@ const dom=(()=>{
             if(e.target.id=="theme1"){
                 body.setAttribute("style","background:url(./theme1.webp);background-attachment: fixed")
                 listForm.setAttribute("style","background:url(./theme1.webp);background-attachment: fixed")
+                saveTheme("theme1.webp");
             }
             if(e.target.id=="theme2"){
                 body.setAttribute("style","background:url(./theme4.jpg);background-attachment: fixed")
                 listForm.setAttribute("style","background:url(./theme4.jpg);background-attachment: fixed")
+                saveTheme("theme2.jpg");
             }
             if(e.target.id=="theme3"){
                 body.setAttribute("style","background:url(./theme3.avif);background-attachment: fixed;backdrop-filter:blur(10px)")
                 listForm.setAttribute("style","background:url(./theme3.avif);background-attachment: fixed;backdrop-filter:blur(10px)")
+                saveTheme("theme3.avif");
             }
         })
     })
+
+    // function setTheme(theme){
+    //     body.setAttribute("style",`background:url(./${theme}.webp);background-attachment: fixed`)
+    //     listForm.setAttribute("style",`background:url(./${theme}.webp);background-attachment: fixed`)
+    // }
+
+    function saveTheme(theme){
+        localStorage.setItem("UserTheme",theme);
+    }
 
     let menuClick=0;
 
@@ -97,7 +117,6 @@ const dom=(()=>{
 
         //local storage
         localStorage.setItem("UserProjects",JSON.stringify(_project__WEBPACK_IMPORTED_MODULE_0__.projects.projectList));
-        console.log("projects",_project__WEBPACK_IMPORTED_MODULE_0__.projects.projectList)
         //add click listener to all projects;
         projectListenClick();
     }
@@ -112,8 +131,8 @@ const dom=(()=>{
                 list.classList.add("active-project");
                 e.stopPropagation();
                 const Project=_project__WEBPACK_IMPORTED_MODULE_0__.projects.projectList.find(item=>item.id==list.id);
-                console.log("found",Project);
                 renderProjectList(Project);
+                sidebar.classList.toggle("menu-invisible");
                 
             })
         })
@@ -126,15 +145,15 @@ const dom=(()=>{
         if(!Project){
             return;
         }
-        
+
         const projectNameShow=document.createElement("h2");
         const delProject=document.createElement("label");
 
         delProject.classList.add("delete-project");
-        delProject.textContent=" ❌ DEL Project ❌";
+        delProject.textContent="DEL Project";
         projectNameShow.textContent=Project.name;
+        projectNameShow.append(delProject);
         projectShow.append(projectNameShow,delProject);
-        console.log("received",Project);
 
         delProject.addEventListener("click",(e)=>{
             _project__WEBPACK_IMPORTED_MODULE_0__.projects.projectList.splice(_project__WEBPACK_IMPORTED_MODULE_0__.projects.projectList.indexOf(Project),1)
@@ -247,8 +266,6 @@ const dom=(()=>{
             }
 
             _todo__WEBPACK_IMPORTED_MODULE_1__.todo.createToDo(Project,listTitle.value,listDescription.value,listDueDate.value,listPriority.value);
-            console.log("after create todo received",Project);
-            console.log(Project.list);
             localStorage.setItem("UserProjects",JSON.stringify(_project__WEBPACK_IMPORTED_MODULE_0__.projects.projectList));
             renderProjectList(Project);
             e.stopPropagation();
