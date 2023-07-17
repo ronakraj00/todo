@@ -68,10 +68,6 @@ const dom=(()=>{
         })
     })
 
-    // function setTheme(theme){
-    //     body.setAttribute("style",`background:url(./${theme}.webp);background-attachment: fixed`)
-    //     listForm.setAttribute("style",`background:url(./${theme}.webp);background-attachment: fixed`)
-    // }
 
     function saveTheme(theme){
         localStorage.setItem("UserTheme",theme);
@@ -166,7 +162,7 @@ const dom=(()=>{
         renderListAddButton(Project);
 
         Project.list.forEach(todo=>{
-            makeListDiv(todo.title,todo.description,todo.dueDate,todo.priority,todo.id);
+            makeListDiv(todo,todo.title,todo.dueDate,todo.priority,todo.id);
         })
         
     }
@@ -182,7 +178,7 @@ const dom=(()=>{
         })
     }
 
-    function makeListDiv(title,description,dueDate,priority,id){
+    function makeListDiv(todo,title,dueDate,priority,id){
         const listDiv=document.createElement("div");
         const listDivTitle=document.createElement("h3");
         const listDivDueDate=document.createElement("p");
@@ -190,11 +186,27 @@ const dom=(()=>{
         const listCheck=document.createElement("input");
         const deleteIcon=document.createElement("div");
 
+        // let clickCount=0;
 
         listCheck.addEventListener("click",()=>{
-                listDivTitle.classList.toggle("strike-through");
+                
+            listDivTitle.classList.toggle("strike-through");
+                if(todo.strike){
+                    todo.strike=false;
+                }
+                else{
+                    todo.strike=true;
+                }
+                // (clickCount++%2!=0)?todo.strike=true:todo.strike=false;
+                console.log(todo);
+                localStorage.setItem("UserProjects",JSON.stringify(_project__WEBPACK_IMPORTED_MODULE_0__.projects.projectList));
+
         })
 
+        if(todo.strike){
+            listDivTitle.classList.toggle("strike-through");
+            listCheck.checked=true;
+        }
 
         deleteIcon.addEventListener("click",()=>{
             listDiv.classList.add("animate-delete");

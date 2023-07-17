@@ -395,6 +395,7 @@ main{
 
 .style-todo p{
     margin-left: auto;
+    margin-right: auto;
 }
 
 .style-todo input{
