@@ -50,7 +50,7 @@ const dom=(()=>{
                 listForm.setAttribute("style","background:url(./theme3.avif);background-attachment: fixed;backdrop-filter:blur(10px)")
                 saveTheme("theme3.avif");
             }
-            e.stopPropagation();
+            // e.stopPropagation();
         })
     })
 
@@ -77,7 +77,7 @@ const dom=(()=>{
         else{
             root.style.setProperty("--blur-body","10px");
         }
-        e.stopPropagation();
+        // e.stopPropagation();
     })
 
 
@@ -85,11 +85,11 @@ const dom=(()=>{
         if(ProjectFormInput.value==""){
             return;
         }
-        
+        e.stopPropagation();
         projects.createProject(ProjectFormInput.value);
         renderProject();
         ProjectFormInput.value="";
-        e.stopPropagation();
+        
     })
     
     function renderProject(){
@@ -115,12 +115,12 @@ const dom=(()=>{
                     elem.classList.remove("active-project");
                 })
                 list.classList.add("active-project");
-                
+                e.stopPropagation();
                 const Project=projects.projectList.find(item=>item.id==list.id);
                 renderProjectList(Project);
                 sidebar.classList.toggle("menu-invisible");
                 menu.classList.toggle("menu-active")
-                e.stopPropagation();
+                
             })
         })
     }
@@ -148,7 +148,7 @@ const dom=(()=>{
             localStorage.setItem("UserProjects",JSON.stringify(projects.projectList));
             renderProject();
             renderProjectList(projects.projectList[0]);
-            e.stopPropagation();
+            // e.stopPropagation();
         })
 
         renderListAddButton(Project);
@@ -163,9 +163,12 @@ const dom=(()=>{
     function removeToDo(listCheck){
         projects.projectList.forEach(project=>{
             const foundToDo=project.list.find(todo=>todo.id==listCheck.id);
-            project.list.splice(project.list.indexOf(foundToDo),1);
-            localStorage.setItem("UserProjects",JSON.stringify(projects.projectList));
-            renderProjectList(project);
+            if(foundToDo){
+                project.list.splice(project.list.indexOf(foundToDo),1);
+                localStorage.setItem("UserProjects",JSON.stringify(projects.projectList));
+                renderProjectList(project);
+            }
+            
         })
     }
 
@@ -193,7 +196,7 @@ const dom=(()=>{
             
             localStorage.setItem("UserProjects",JSON.stringify(projects.projectList));
             
-            e.stopPropagation();
+            // e.stopPropagation();
         })
 
         if(todo.strike){
@@ -201,12 +204,12 @@ const dom=(()=>{
             listCheck.checked=true;
         }
 
-        deleteIcon.addEventListener("click",(e)=>{
+        deleteIcon.addEventListener("click",()=>{
             listDiv.classList.add("animate-delete");
             setTimeout(() => {
                 removeToDo(listCheck);
             }, 400);
-            e.stopPropagation();
+            // e.stopPropagation();
         })
 
         listDiv.classList.add(`priority-${priority}`);
@@ -234,8 +237,8 @@ const dom=(()=>{
         const listAddButton=document.createElement("button");
         listAddButton.textContent="+";
         listAddButton.addEventListener("click",(e)=>{
-            renderListForm(Project);
             e.stopPropagation();
+            renderListForm(Project);
         })
         listAddButtonDiv.id="list-button-div"
         listAddButtonDiv.append(listAddButton);
