@@ -40,8 +40,8 @@ const dom=(()=>{
                 saveTheme("theme1.webp");
             }
             if(e.target.id=="theme2"){
-                body.setAttribute("style","background:url(./theme4.jpg);background-attachment: fixed")
-                listForm.setAttribute("style","background:url(./theme4.jpg);background-attachment: fixed")
+                body.setAttribute("style","background:url(./theme2.jpg);background-attachment: fixed")
+                listForm.setAttribute("style","background:url(./theme2.jpg);background-attachment: fixed")
                 saveTheme("theme2.jpg");
             }
             if(e.target.id=="theme3"){
